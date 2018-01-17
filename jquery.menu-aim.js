@@ -1,4 +1,9 @@
 /**
+ * THIS IS A FORK IN ORDER TO PROVIDE A NPM PACKAGE OF IT!
+ *
+ * ORIGINAL:
+ * Copyright © 2016 Ben Kamens | MIT license | https://github.com/kamens/jQuery-menu-aim
+ *
  * menu-aim is a jQuery plugin for dropdown menus that can differentiate
  * between a user trying hover over a dropdown item vs trying to navigate into
  * a submenu's contents.
@@ -67,10 +72,16 @@
  *          submenuDirection: "right"
  *      });
  *
- * https://github.com/kamens/jQuery-menu-aim
 */
-(function($) {
-
+(function (factory) {
+  if (typeof exports === 'object') {
+      factory(require('jquery'));
+  } else if (typeof define === 'function' && define.amd) {
+      define(['jquery'], factory);
+  } else {
+      factory(jQuery);
+  }
+}(function ($) {
     $.fn.menuAim = function(opts) {
         // Initialize menu-aim for all elements in jQuery collection
         this.each(function() {
@@ -158,10 +169,6 @@
          * Activate a menu row.
          */
         var activate = function(row) {
-                if (row == activeRow) {
-                    return;
-                }
-
                 if (activeRow) {
                     options.deactivate(activeRow);
                 }
@@ -319,5 +326,4 @@
         $(document).mousemove(mousemoveDocument);
 
     };
-})(jQuery);
-
+}));
